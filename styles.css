@@ -1,0 +1,178 @@
+
+:root {
+    --accent: #3b82f6;
+    --accent-glow: rgba(59, 130, 246, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+body {
+    perspective: 3000px;
+    background: #000307;
+}
+
+/* Cinematic Grain Texture - Ultrafast & Ghostly */
+.grain::after {
+    content: "";
+    position: fixed;
+    top: -150%;
+    left: -150%;
+    width: 300%;
+    height: 300%;
+    background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 100;
+    animation: noise 5s steps(4) infinite;
+}
+
+@keyframes noise {
+    0%, 100% { transform:translate(0,0) }
+    25% { transform:translate(-1%,-2%) }
+    50% { transform:translate(2%,-1%) }
+    75% { transform:translate(-2%,1%) }
+}
+
+/* Volumetric Glassmorphism */
+.glass-panel {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+    backdrop-filter: blur(30px) saturate(220%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 
+        0 4px 10px -2px rgba(0, 0, 0, 0.5),
+        0 15px 40px -8px rgba(0, 0, 0, 0.8),
+        inset 0 1px 2px rgba(255, 255, 255, 0.15);
+    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-style: preserve-3d;
+}
+
+/* Neural Flow Shimmer */
+.neural-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+.neural-shimmer::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.01) 40%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(255, 255, 255, 0.01) 60%,
+        transparent 100%
+    );
+    animation: shimmer-flow 6s infinite ease-in-out;
+    pointer-events: none;
+}
+
+@keyframes shimmer-flow {
+    0% { transform: translate(-40%, -40%) rotate(0deg); }
+    100% { transform: translate(20%, 20%) rotate(10deg); }
+}
+
+/* 3D Entry Animation */
+.reveal-3d {
+    animation: reveal3D 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: center center;
+}
+
+@keyframes reveal3D {
+    0% { opacity: 0; transform: scale(0.97) rotateX(10deg) translateY(40px) translateZ(-200px); filter: blur(12px); }
+    100% { opacity: 1; transform: scale(1) rotateX(0deg) translateY(0) translateZ(0); filter: blur(0); }
+}
+
+/* Lightning */
+.lightning-bolt-anim {
+    stroke-dasharray: 40 160;
+    stroke-dashoffset: 200;
+    animation: dash-flow 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes dash-flow {
+    from { stroke-dashoffset: 200; }
+    to { stroke-dashoffset: 0; }
+}
+
+/* Refined Sparkle Animation - Subtle & Elegant */
+/* Use a class .sparkle-anim to apply this reliably */
+@keyframes sparkle-flicker {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+.sparkle-anim {
+    animation-name: sparkle-flicker;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    /* Duration is controlled inline via style */
+}
+
+/* Smooth Loading Wave */
+@keyframes loading-wave {
+    0%, 100% { opacity: 0.2; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.05); box-shadow: 0 0 15px rgba(59, 130, 246, 0.6); }
+}
+
+.loading-dot {
+    animation: loading-wave 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes pulse-energy {
+    0%, 100% { transform: scale(1) translateZ(-50px); opacity: 0.1; filter: blur(100px); }
+    50% { transform: scale(1.15) translateZ(-80px); opacity: 0.4; filter: blur(150px); }
+}
+
+/* Background Liquid Elements */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(150px);
+    z-index: 0;
+    opacity: 0.15;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    transition: transform 3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.orb-1 { width: 1000px; height: 1000px; background: radial-gradient(circle, #2563eb, #000); top: -20%; left: -15%; animation: floatOrb 45s infinite alternate; }
+.orb-2 { width: 900px; height: 900px; background: radial-gradient(circle, #0891b2, #000); bottom: -20%; right: -15%; animation: floatOrb 55s infinite alternate-reverse; }
+
+@keyframes floatOrb {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(150px, 80px) scale(1.2); }
+}
+
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); }
+.custom-scrollbar::-webkit-scrollbar-thumb { 
+    background: rgba(255, 255, 255, 0.15); 
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.hover-lift {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+}
+.hover-lift:hover {
+    transform: translateY(-4px) translateZ(30px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+.btn-primary-action {
+    background: white;
+    color: #000;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-style: preserve-3d;
+}
+.btn-primary-action:hover {
+    transform: scale(1.05) translateY(-2px) translateZ(40px);
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.4), 0 10px 25px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.1);
+}
+.btn-primary-action:active {
+    transform: scale(0.95) translateZ(10px);
+}
