@@ -1,0 +1,5 @@
+{
+  "name": "n8n AI Orchestrator",
+  "description": "A professional-grade chat interface designed to connect with your n8n workflows, featuring Gemini-powered smart suggestions and real-time conversation management.",
+  "requestFramePermissions": []
+}
