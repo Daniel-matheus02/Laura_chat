@@ -10,37 +10,44 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message }) => {
   const isUser = message.role === 'user';
 
   return (
-    <div className={`flex w-full mb-8 ${isUser ? 'justify-end' : 'justify-start'} message-entrance`}>
-      <div className={`group relative max-w-[80%] md:max-w-[70%] transition-all duration-500 hover:scale-[1.01] ${
+    <div className={`flex w-full mb-12 ${isUser ? 'justify-end' : 'justify-start'} reveal-3d`} style={{ animationDuration: '1.5s' }}>
+      <div className={`group relative max-w-[85%] md:max-w-[70%] flex flex-col ${
         isUser ? 'items-end' : 'items-start'
       }`}>
-        {/* Subtle shadow layer */}
-        <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+        {/* Subtle Fluid Aura */}
+        <div className={`absolute -inset-4 bg-blue-500/0 rounded-[3rem] blur-2xl group-hover:bg-blue-500/[0.03] transition-all duration-1000`}></div>
         
-        <div className={`relative px-7 py-5 rounded-3xl glass-card ${
+        <div className={`relative px-10 py-8 rounded-[2.5rem] shadow-2xl border transition-all duration-700 ease-out ${
           isUser 
-            ? 'bg-gradient-to-br from-blue-600 to-blue-700 text-white border-blue-400/20' 
-            : 'bg-slate-900/40 text-slate-100 border-white/5'
-        }`}>
-          <div className="flex items-center justify-between gap-6 mb-3">
-            <div className="flex items-center gap-2">
-              <div className={`w-1.5 h-1.5 rounded-full ${isUser ? 'bg-blue-200' : 'bg-blue-500 animate-pulse'}`}></div>
-              <span className={`text-[10px] font-extrabold uppercase tracking-[0.25em] ${isUser ? 'text-blue-100' : 'text-slate-400'}`}>
-                {isUser ? 'Client Node' : 'Orchestration Engine'}
+            ? 'bg-gradient-to-br from-blue-600 to-blue-800 text-white border-blue-400/20 rounded-br-lg' 
+            : 'bg-white/[0.03] text-slate-100 border-white/5 backdrop-blur-3xl rounded-bl-lg'
+        } group-hover:translate-y-[-2px]`}>
+          
+          <div className="flex items-center justify-between gap-12 mb-4 border-b border-white/5 pb-4">
+            <div className="flex items-center gap-3">
+              <span className={`text-[9px] font-black uppercase tracking-[0.4em] ${isUser ? 'text-blue-200' : 'text-slate-600'}`}>
+                {isUser ? 'Neural Input' : 'Core Response'}
               </span>
             </div>
-            <span className="text-[9px] font-mono opacity-30 tracking-tighter">
+            <span className="text-[8px] font-mono opacity-20 tracking-widest uppercase">
               {new Date(message.timestamp).toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })}
             </span>
           </div>
           
-          <div className="text-[15px] leading-relaxed font-medium tracking-tight whitespace-pre-wrap break-words">
+          <div className="text-[16px] leading-relaxed font-light tracking-tight whitespace-pre-wrap break-words opacity-90">
             {message.content}
           </div>
+
+          {!isUser && (
+            <div className="mt-5 flex items-center gap-2 opacity-10 group-hover:opacity-30 transition-opacity">
+              <div className="h-px flex-1 bg-white"></div>
+              <span className="text-[7px] font-black tracking-[0.8em] uppercase">Verified Flow</span>
+            </div>
+          )}
         </div>
         
-        {/* 3D Floor Shadow */}
-        <div className="mt-2 h-1 w-full bg-black/20 blur-md rounded-full transform scale-x-90 opacity-50"></div>
+        {/* Soft Fluid Shadow */}
+        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[80%] h-6 bg-black/40 blur-2xl rounded-full opacity-0 group-hover:opacity-20 transition-all duration-1000 scale-x-75 group-hover:scale-x-100"></div>
       </div>
     </div>
   );
